@@ -10,4 +10,5 @@
     <ProjectReference Include="..\Catalogo.Domain\Catalogo.Domain.csproj" />
   </ItemGroup>
 
-</Project>
+
+	</Project>
