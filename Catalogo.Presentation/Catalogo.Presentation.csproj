@@ -17,4 +17,22 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="docs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\album-1.jpg" />
+    <None Include="wwwroot\images\album-2.jpg" />
+    <None Include="wwwroot\images\album-3.jpg" />
+    <None Include="wwwroot\images\album-4.jpg" />
+    <None Include="wwwroot\images\album-5.jpg" />
+    <None Include="wwwroot\images\canciones-1.png" />
+    <None Include="wwwroot\images\canciones-2.png" />
+    <None Include="wwwroot\images\canciones-3.png" />
+    <None Include="wwwroot\images\canciones-4.png" />
+    <None Include="wwwroot\images\canciones-5.png" />
+    <None Include="wwwroot\videos\bts-loop.mp4" />
+  </ItemGroup>
+
 </Project>

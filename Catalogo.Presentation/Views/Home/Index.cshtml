@@ -1,8 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section text-center">
+    <h1 class="titulo-principal">Catálogo de álbumes de BTS</h1>
+    <video autoplay loop muted playsinlines class="hero-video-local" <source src="~/videos/bts-loop.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+
+    <p class="subtitulo">Explora y gestiona tu colección musical de Bangtan. Una discografía llena de historia y talento.</p>
+
+    <a asp-controller="Catalogo" asp-action="Index" class="btn-explorar">Explorar catálogo 💜</a>
+
 </div>
+

@@ -1,15 +1,16 @@
+@import url('site.css');
 html {
-  font-size: 14px;
+  font-size: 20px;
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--morado);
 }
 
 html {
@@ -18,7 +19,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, #F3E5F5 0%, #ef9de4 45%, #9226bd 100%);
+    background-attachment: fixed; /* El fondo se queda fijo al hacer scroll */
+    min-height: 100vh;
+    color: black;
+    line-height: 1.6;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -29,3 +35,244 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+:root {
+    --morado: #6A1B9A;
+    --morado-claro: #F3E5F5;
+    --morado-oscuro: #4A148C;
+    --text-oscuro: #212529;
+    --texto-oscuro: #2C1A4D; /* Morado muy oscuro para leer bien */
+    --lila-pastel: #E2D1F9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color: #6A1B9A;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.mi-menu-morado {
+    background-color: var(--morado-claro);
+    box-shadow: 0 4px 15px var(--morado-oscuro) !important;
+}
+
+.navbar-dark navbar-brand, .navbar-dark nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.navbar-dark .nav-link:hover {
+    color: var(--lila-pastel) !important;
+}
+
+.btn-agregar-album {
+    background-color: var(--lila-pastel);
+    color: var(--texto-oscuro);
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 2px solid var(--texto-oscuro); /* Borde estilo tech */
+    box-shadow: 2px 2px 0px var(--texto-oscuro); /* Sombrita sólida retro */
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.contenedor-formulario {
+    background-color: rgba(255,255,255,0.95);
+    max-width: 500px;
+    margin: 40px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(106,27,154,0.3);
+}
+
+.grupo-input {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .grupo-input input, .grupo-input textarea {
+        padding: 10px;
+        border: 2px solid var(--lila-pastel);
+        border-radius: 8px;
+        outline: none;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+        /* Cuando el usuario hace clic para escribir */
+        .grupo-input input:focus, .grupo-input textarea:focus {
+            border-color: var(--morado); /* El borde cambia al morado BTS */
+        }
+
+.btn-guardar {
+    background-color: var(--morado);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%; /* Botón ancho, muy moderno */
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-guardar:hover {
+        background-color: var(--morado-oscuro);
+    }
+
+/* 5. Estilo para el link de cancelar */
+.link-cancelar {
+    color: var(--morado);
+    text-decoration: none;
+    font-weight: 500;
+    background-color: var(--morado);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%; /* Botón ancho, muy moderno */
+    font-size: 1.1rem;
+}
+
+    .link-cancelar:hover {
+        text-decoration: underline;
+    }
+
+.contenedor-filtros {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filtro-btn {
+    background-color: var(--lila-pastel);
+    color: var(--texto-oscuro);
+    padding: 16px 32px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+    .filtro-btn:hover {
+        background-color: var(--morado);
+        color: white;
+        box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+    }
+
+.divisor {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--morado-claro), transparent);
+    margin: 25px 0;
+}
+
+.grid-albumes {
+    display: grid;
+    /* Esto es magia pura: crea columnas automáticas. 
+       Si caben tarjetas de 300px, las pone juntas. Si no caben, las pasa abajo. */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px; /* Espacio entre cada tarjeta */
+    margin-bottom: 40px;
+}
+
+.tarjeta-album {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 25px;
+    text-decoration: none; /* Quitamos la rayita de enlace */
+    color: var(--texto-oscuro);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid var(--morado); /* Detalle de color en el borde izquierdo */
+    transition: transform 0.3s, box-shadow 0.3s; /* Prepara la animación */
+}
+
+    .tarjeta-album:hover {
+        transform: translateY(-8px); /* Mueve la tarjeta 8 pixeles hacia arriba */
+        box-shadow: 0 12px 20px rgba(106, 27, 154, 0.2); /* Hace la sombra más grande */
+    }
+
+    .tarjeta-album h3 {
+        color: var(--morado);
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        margin-top: 0;
+    }
+
+.tarjeta-info {
+    display: flex;
+    justify-content: space-between; /* Manda un elemento a la izquierda y otro a la derecha */
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.etiqueta-tipo {
+    background-color: var(--morado-claro);
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: var(--morado-oscuro);
+}
+
+/* =========================================
+   ESTILOS DE LA PÁGINA DE INICIO (HERO SECTION)
+   ========================================= */
+
+/* 1. Creamos la animación: va de estar transparente y abajo, a visible y arriba */
+@keyframes aparecerFlotando {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* Empieza 40 pixeles más abajo */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición original */
+    }
+}
+
+/* 2. El contenedor principal: centramos todo y le damos la animación */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Hace que el contenido ocupe al menos el 60% del alto de la pantalla, quitando esa sensación de vacío */
+    animation: aparecerFlotando 1.2s ease-out; /* Ejecuta la animación en 1.2 segundos */
+}
+
+/* 3. Estilo del título */
+.titulo-principal {
+    font-size: 4rem; /* Hacemos la letra enorme e imponente */
+    color: var(--morado-oscuro);
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5); /* Le da un ligero brillo */
+}
+
+/* 4. Estilo del subtítulo */
+.subtitulo {
+    font-size: 1.3rem;
+    color: var(--texto-oscuro);
+    margin-bottom: 40px;
+    max-width: 600px; /* Evita que el texto se estire de esquina a esquina */
+}
+
+
+
