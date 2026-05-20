@@ -12,11 +12,9 @@ namespace CatalogoApp.Domain.Models
         public int Ano { get; set; }
         public int numeroCanciones { get; set; }
         public string Descripcion { get; set; }
-        public string? ArchivoPortada { get; set; }
         public string? ImagenBase64 { get; set; }
         public string? TipoImagen { get; set; }
 
-        public string? ArchivoCanciones { get; set; }
         public string? CancionesListaBase64 { get; set; }
         public string? TipoCanciones { get; set; }
     }

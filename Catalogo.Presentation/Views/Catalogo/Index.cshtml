@@ -8,9 +8,9 @@
 
     <div class="contenedor-filtros">
         <a asp-action="Index" class="filtro-btn">Todos</a>
-        @foreach (var tip in ViewBag.Tipos as List<string>)
+        @foreach (var tip in ViewBag.Lanzamientos as List<string>)
         {
-            <a asp-action="Index" asp-route-tipo="@tip" class="filtro-btn">@tip</a>
+            <a asp-action="Index" asp-route-lanzamiento="@tip" class="filtro-btn">@tip</a>
         }
     </div>
 

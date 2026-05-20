@@ -44,7 +44,7 @@ namespace CatalogoApp.Application.Service
                         .ToList();
         }
 
-        public List<string> ObtenerGeneros()
+        public List<string> ObtenerTiposLanzamiento()
         {
             return _repo.ObtenerTodos()
                         .Select(i => i.tiposLanzamiento)

@@ -1,6 +1,9 @@
 ﻿using CatalogoApp.Application.Service;
 using CatalogoApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Buffers.Text;
+using System.Runtime.InteropServices;
+using System.Text.Unicode;
 
 namespace Catalogo.Presentation.Controllers
 {
@@ -16,14 +19,14 @@ namespace Catalogo.Presentation.Controllers
 
         // Lista con filtro opcional por género
 
-        public IActionResult Index(string? genero)
+        public IActionResult Index(string? lanzamiento)
         {
-            var items = string.IsNullOrEmpty(genero)
+            var items = string.IsNullOrEmpty(lanzamiento)
                 ? _service.ObtenerTodos()
-                : _service.ObtenerPorTiposLanzamiento(genero);
+                : _service.ObtenerPorTiposLanzamiento(lanzamiento);
 
-            ViewBag.Generos = _service.ObtenerGeneros();
-            ViewBag.GeneroActual = genero;
+            ViewBag.Lanzamientos = _service.ObtenerTiposLanzamiento();
+            ViewBag.LanzamientoActual = lanzamiento;
 
             return View(items);
         }
@@ -32,6 +35,7 @@ namespace Catalogo.Presentation.Controllers
 
         public IActionResult Detalle(int id)
         {
+
             var item = _service.ObtenerPorId(id);
             return item == null ? NotFound() : View(item);
         }
@@ -46,6 +50,24 @@ namespace Catalogo.Presentation.Controllers
         [HttpPost]
         public IActionResult Agregar(Item item, IFormFile? ArchivoPortada, IFormFile? ArchivoCanciones)
         {
+            if (ArchivoPortada != null && ArchivoPortada.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    ArchivoPortada.CopyTo(memoryStream);
+                    item.ImagenBase64 = Convert.ToBase64String(memoryStream.ToArray());
+                    item.TipoImagen = ArchivoPortada.ContentType;
+                }       
+            }
+            if (ArchivoCanciones != null && ArchivoCanciones.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    ArchivoCanciones.CopyTo(memoryStream);
+                    item.CancionesListaBase64 = Convert.ToBase64String(memoryStream.ToArray());
+                    item.TipoCanciones = ArchivoCanciones.ContentType;
+                }
+            }
             _service.Agregar(item);
             return RedirectToAction("Index");
         }

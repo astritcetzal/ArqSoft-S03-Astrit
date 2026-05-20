@@ -1,10 +1,10 @@
 [
   {
     "Id": 1,
-    "Titulo": "Devil May Cry",
-    "Genero": "Hack and Slash",
-    "Consola": "PlayStation 2",
-    "Ano": 2001,
-    "Descripcion": "Dante, cazador de demonios, enfrenta a Mundus."
+    "Titulo": "Skool luv Affair",
+    "tiposLanzamiento": "Mini álbum (EP)",
+    "Ano": 2014,
+    "numeroCanciones": 10,
+    "Descripcion": "Marca el clímax de la School Trilogy con un estilo Hip-Hop y temas sobre el amor y la escuela."
   }
 ]
