@@ -1,11 +1,11 @@
-﻿using Catalogo.Domain.Models;
+﻿using CatalogoApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Catalogo.Domain.Interfaces
+namespace CatalogoApp.Domain.Interfaces
 {
-    internal interface IItemRepository
+    public interface IItemRepository
     {
         List<Item> ObtenerTodos();
         Item? ObtenerPorId(int id);

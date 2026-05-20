@@ -1,5 +1,5 @@
-﻿using Catalogo.Domain.Models;
-using Catalogo.Domain.Interfaces;
+﻿using CatalogoApp.Domain.Models;
+using CatalogoApp.Domain.Interfaces;
 
 using System.Text.Json;
 

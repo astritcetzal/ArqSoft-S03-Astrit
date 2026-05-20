@@ -1,0 +1,46 @@
+﻿@model List<CatalogoApp.Domain.Models.Item>
+
+<div class="contenedor-principal">
+    <div class="header-catalogo">
+        <h1>Mi Catálogo de Bangtan</h1>
+        <a asp-action="Agregar" class="btn-agregar-album">+ Agregar álbum</a>
+    </div>
+
+    <div class="contenedor-filtros">
+        <a asp-action="Index" class="filtro-btn">Todos</a>
+        @foreach (var tip in ViewBag.Tipos as List<string>)
+        {
+            <a asp-action="Index" asp-route-tipo="@tip" class="filtro-btn">@tip</a>
+        }
+    </div>
+
+    <hr class="divisor" />
+
+    <div class="grid-albumes">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Detalle" asp-route-id="@item.Id" class="tarjeta-album">
+                <div class="contenedor-cover">
+                    @if (!string.IsNullOrEmpty(item.ImagenBase64))
+                    {
+                        <!-- Si la imagen viene de la memoria RAM (Base64), la mostramos así -->
+                        <img src="data:@item.TipoImagen;base64,@item.ImagenBase64" alt="Portada @item.Titulo" class="capa-album" />
+                    }
+                    else
+                    {
+                        <!-- Si no tiene imagen en RAM, mostramos las que guardaste a mano (Skool Luv Affair, Wings, etc.) -->
+                        <img src="~/images/album-@(@item.Id).jpg" alt="Portada @item.Titulo" class="capa-album" />
+                    }
+                </div>
+
+                <div class="tarjeta-contenido">
+                    <h3>@item.Titulo</h3>
+                    <div class="tarjeta-info">
+                        <span class="etiqueta-tipo">@item.tiposLanzamiento</span>
+                        <span class="etiqueta-ano"> @item.Ano</span>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

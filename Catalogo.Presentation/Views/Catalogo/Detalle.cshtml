@@ -1,0 +1,37 @@
+﻿@model CatalogoApp.Domain.Models.Item
+
+<div class="detalle-titulo">
+    <h1>@Model.Titulo</h1>
+</div>
+<div class="detalle-total">
+    <div class= "detalle-texto">
+    <p><strong>Tipo de lanzamiento: </strong> @Model.tiposLanzamiento</p>
+
+    <p><strong>Numero de canciones: </strong>@Model.numeroCanciones</p>
+
+    <p><strong>Año: </strong>@Model.Ano</p>
+
+    <p><strong>Descripción: </strong>@Model.Descripcion</p>
+
+    </div>
+
+    
+
+    <h2 class="titulo-seccion">Canciones</h2>
+    
+    <div class="contenedor-canciones-uniforme">
+        @if (!string.IsNullOrEmpty(Model.CancionesListaBase64)) {
+            <img src="data:@@Model.TipoCanciones; base64, @Model.CancionesListaBase64" alt="Lista de canciones" class="imagen-canciones-ajustada" />
+
+        }
+        else
+        {
+            <img src="~/images/canciones-@(@Model.Id).png" alt="Lista de canciones" class="imagen-canciones-ajustada" />
+        }
+
+    </div>
+
+</div>
+<hr />
+<a asp-action="Index" class="link-cancelar">&larr; Volver al Catálogo</a>
+

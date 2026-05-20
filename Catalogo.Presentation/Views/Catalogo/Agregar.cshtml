@@ -1,0 +1,40 @@
+﻿@model CatalogoApp.Domain.Models.Item
+
+<div class= "contenedos-formulario">
+<h1>Agregar álbum</h1>
+    <form asp-action="Agregar" method="post" enctype="multipart/form-data">
+        <div class="grupo-input">
+        <label>Titulo</label>
+        <input asp-for="Titulo"/>
+    </div>
+    <div class="grupo-input">
+        <label>Tipo de lanzamiento</label>
+        <input asp-for="tiposLanzamiento" />
+    </div>
+        <div class="grupo-input">
+        <label>Numero de canciones</label>
+        <input asp-for="numeroCanciones" />
+    </div>
+        <div class="grupo-input">
+        <label>Año</label>
+        <input asp-for="Ano"  type="number"/>
+    </div>
+        <div class="grupo-input">
+        <label>Descripción</label>
+        <textarea asp-for="Descripcion" > </textarea>
+            <div class="grupo-input">
+                <label>Imagen de Portada (Opcional)</label>
+                <input type="file" name="ArchivoPortada" accept="image/*" />
+            </div>
+            <div class="grupo-input">
+                <label>Imagen de la lista de canciones (Opcional)</label>
+                <input type="file" name="ArchivoCanciones" accept="image/*" />
+            </div>
+    <button type="submit" class="btn-guardar">Guardar álbum</button>
+
+</form>
+
+<hr />
+<a asp-action="Index" class="link-cancelar">&larr; Cancelar</a>
+
+</div>

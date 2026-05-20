@@ -1,7 +1,7 @@
-﻿using Catalogo.Domain.Models;
-using Catalogo.Domain.Interfaces;
+﻿using CatalogoApp.Domain.Models;
+using CatalogoApp.Domain.Interfaces;
 
-namespace CatalogoApp.Application.Services
+namespace CatalogoApp.Application.Service
 {
     public class ItemService
     {
@@ -37,17 +37,17 @@ namespace CatalogoApp.Application.Services
         }
 
         // Método útil para el filtro por categoría/género
-        public List<Item> ObtenerPorGenero(string genero)
+        public List<Item> ObtenerPorTiposLanzamiento(string tiposLanzamiento)
         {
             return _repo.ObtenerTodos()
-                        .Where(i => i.Genero == genero)
+                        .Where(i => i.tiposLanzamiento == tiposLanzamiento)
                         .ToList();
         }
 
         public List<string> ObtenerGeneros()
         {
             return _repo.ObtenerTodos()
-                        .Select(i => i.Genero)
+                        .Select(i => i.tiposLanzamiento)
                         .Distinct()
                         .ToList();
         }
