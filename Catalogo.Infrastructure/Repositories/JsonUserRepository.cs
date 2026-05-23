@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq; // Necesario para usar .FirstOrDefault() y .Max()
 using System.Text.Json;
-namespace Catalogo.Infrastructure.Repositories
+namespace CatalogoApp.Infrastructure.Repositories
 {
     public class JsonUserRepository : IUserRepository
     {
@@ -32,8 +32,8 @@ namespace Catalogo.Infrastructure.Repositories
             return JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
         }
 
-        // Agrega un item y guarda la lista completa en el JSON
-        public void Agregar(User user)
+        // Inicia sesión y guarda la lista completa en el JSON
+        public void IniciarSesion(User user)
         {
             var users = ObtenerTodos();
 
@@ -44,6 +44,12 @@ namespace Catalogo.Infrastructure.Repositories
 
             users.Add(user);
             Guardar(users);
+        }
+
+
+        public User? ObtenerPorId(int id)
+        {
+            return ObtenerTodos().FirstOrDefault(u => u.Id == id);
         }
 
         // Método privado: serializa y escribe el archivo

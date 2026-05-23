@@ -17,8 +17,19 @@ namespace CatalogoApp.Presentation.Controllers
             _service = service;
         }
 
-        
-        
+        public IActionResult Registrar()
+        {
+            return View();
+        }
+        // 2. Guardar el usuario (POST)
+        [HttpPost]
+        public IActionResult Registrar(User user)
+        {
+            _service.IniciarSesion(user);
+            // Tras registrarse, lo mandamos al catálogo
+            return RedirectToAction("Index", "Catalogo");
+        }
+
         public IActionResult IniciarSesion()
         {
             return View();
@@ -26,10 +37,20 @@ namespace CatalogoApp.Presentation.Controllers
 
         // Formulario — POST
         [HttpPost]
-        public IActionResult IniciarSesion(User user)
+        public IActionResult IniciarSesion(string correo, string contrasena)
         {
-            _service.Agregar(user);
-            return RedirectToAction("Index");
+            var usuarios = _service.ObtenerTodos();
+
+            // Busca si existe alguien con ese correo y esa contraseña
+            var usuarioValido = usuarios.FirstOrDefault(u => u.Correo == correo && u.Contrasena == contrasena);
+
+            if (usuarioValido != null)
+                return RedirectToAction("Index", "Catalogo");
+
+            // Si no es válido, mostrar mensaje de error
+            ModelState.AddModelError(string.Empty, "Correo o contraseña incorrectos");
+            return View();
+
         }
 
     }
