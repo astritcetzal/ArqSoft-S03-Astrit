@@ -518,5 +518,30 @@ header {
     display: block;
 }
 
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        font-size: 25px;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #ff00ff; /* Ese color fucsia que usas en tu diseño */
+        }
+
+
+
+
    
 

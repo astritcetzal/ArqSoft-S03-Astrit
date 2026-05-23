@@ -32,6 +32,47 @@
     </div>
 
 </div>
+
+
+
+<hr />
+
+<h3>Reseñas</h3>
+<p><strong>Rating promedio:</strong> @ViewBag.Promedio / 5</p>
+@if (ViewBag.Reseñas != null)
+{
+    @foreach (var r in ViewBag.Reseñas)
+    {
+        <div class="reseña-item" style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+            <strong>@r.Usuario:</strong> @r.Comentario
+
+            <span class="estrellas-fijas" style="margin-left: 10px;">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <span style="color: @(i <= r.Calificacion ? "#ff00ff" : "#ccc"); font-size: 18px;">★</span>
+                }
+            </span>
+        </div>
+    }
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="AgregarReseña" method="post">
+        <input type="hidden" name="AlbumId" value="@Model.Id" />
+        <input type="hidden" name="Usuario" value="@User.Identity.Name" />
+        <textarea name="Comentario" placeholder="Escribe tu reseña..." required></textarea>
+        <div class="rating">
+            <input type="radio" id="star5" name="Calificacion" value="5" /><label for="star5">★</label>
+            <input type="radio" id="star4" name="Calificacion" value="4" /><label for="star4">★</label>
+            <input type="radio" id="star3" name="Calificacion" value="3" /><label for="star3">★</label>
+            <input type="radio" id="star2" name="Calificacion" value="2" /><label for="star2">★</label>
+            <input type="radio" id="star1" name="Calificacion" value="1" /><label for="star1">★</label>
+        </div>
+        <button type="submit">Enviar Reseña</button>
+    </form>
+}
+
+
 <hr />
 <a asp-action="Index" class="link-cancelar">&larr; Volver al Catálogo</a>
-

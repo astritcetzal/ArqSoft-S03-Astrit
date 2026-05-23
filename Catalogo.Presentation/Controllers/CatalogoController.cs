@@ -4,17 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using System.Buffers.Text;
 using System.Runtime.InteropServices;
 using System.Text.Unicode;
-
+using Microsoft.AspNetCore.Authorization;
 namespace CatalogoApp.Presentation.Controllers
 {
     public class CatalogoController : Controller
     {
         private readonly ItemService _service;
-
+        private readonly ReviewService _reviewService;
         // El servicio llega por inyección de dependencias
-        public CatalogoController(ItemService service)
+        public CatalogoController(ItemService service, ReviewService reviewService)
         {
             _service = service;
+            _reviewService = reviewService;
         }
 
         // Lista con filtro opcional por género
@@ -35,17 +36,28 @@ namespace CatalogoApp.Presentation.Controllers
 
         public IActionResult Detalle(int id)
         {
-
             var item = _service.ObtenerPorId(id);
-            return item == null ? NotFound() : View(item);
+            var resenas = _reviewService.ObtenerPorAlbum(id);
+
+            // Lógica de promedio:
+            double promedio = resenas.Any() ? resenas.Average(r => r.Calificacion) : 0;
+
+            ViewBag.Reseñas = resenas;
+            ViewBag.Promedio = Math.Round(promedio, 1); // Redondeamos a 1 decimal
+            ViewBag.Cantidad = resenas.Count;
+
+            return View(item);
         }
 
         // Formulario — GET
+        // --- ESTOS SON PRIVADOS (Con cadenero) ---
+        [Authorize]
         public IActionResult Agregar()
         {
             return View();
         }
 
+        [Authorize]
         // Formulario — POST
         [HttpPost]
         public IActionResult Agregar(Item item, IFormFile? ArchivoPortada, IFormFile? ArchivoCanciones)
@@ -73,10 +85,31 @@ namespace CatalogoApp.Presentation.Controllers
         }
 
         // Eliminar
+        [Authorize]
         public IActionResult Eliminar(int id)
         {
             _service.Eliminar(id);
             return RedirectToAction("Index");
+        }
+
+        // --- MÉTODO PARA GUARDAR LA RESEÑA ---
+        [HttpPost]
+        [Authorize] // Solo usuarios registrados pueden publicar
+        public IActionResult AgregarReseña(Review review)
+        {
+            // Validamos que el comentario no esté vacío
+            if (string.IsNullOrEmpty(review.Comentario))
+            {
+                // Si está vacío, regresamos al detalle del álbum con un mensaje
+                TempData["Error"] = "El comentario no puede estar vacío.";
+                return RedirectToAction("Detalle", new { id = review.AlbumId });
+            }
+
+            // Guardamos la reseña usando el servicio
+            _reviewService.Agregar(review);
+
+            // Regresamos a la misma página de detalles para que se vea la nueva reseña
+            return RedirectToAction("Detalle", new { id = review.AlbumId });
         }
     }
 
