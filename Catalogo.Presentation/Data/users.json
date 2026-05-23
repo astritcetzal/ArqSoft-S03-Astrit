@@ -10,5 +10,11 @@
     "Nombre": "airan ",
     "Correo": "astri@gmail.com",
     "Contrasena": "abcde"
+  },
+  {
+    "Id": 3,
+    "Nombre": "lulu",
+    "Correo": "lulu@gmail.com",
+    "Contrasena": "Arqui123"
   }
 ]

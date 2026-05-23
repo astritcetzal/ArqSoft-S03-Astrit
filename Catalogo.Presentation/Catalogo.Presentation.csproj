@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="docs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Usuario\Registrar.cshtml" />
     <None Include="wwwroot\images\album-1.jpg" />
     <None Include="wwwroot\images\album-2.jpg" />

@@ -3,28 +3,36 @@
     "Id": 1,
     "AlbumId": 1,
     "Usuario": "airan ",
-    "Comentario": "DCDC",
+    "Comentario": "Lo mejor",
     "Calificacion": 5
   },
   {
     "Id": 2,
     "AlbumId": 1,
     "Usuario": "airan ",
-    "Comentario": "DXAX",
+    "Comentario": "Genial",
     "Calificacion": 3
   },
   {
     "Id": 3,
     "AlbumId": 1,
     "Usuario": "airan ",
-    "Comentario": "ASDADS",
+    "Comentario": "Amo",
     "Calificacion": 4
   },
+  
   {
     "Id": 4,
-    "AlbumId": 1,
+    "AlbumId": 3,
     "Usuario": "airan ",
-    "Comentario": "EASDC",
-    "Calificacion": 2
+    "Comentario": "El mejor \u00E1lbum de su carrera tiene las mejores canciones",
+    "Calificacion": 5
+  },
+  {
+    "Id": 5,
+    "AlbumId": 3,
+    "Usuario": "lulu",
+    "Comentario": "No es mi favorito, pero si es uno de mis \u00E1lbumes favoritos",
+    "Calificacion": 4
   }
 ]
