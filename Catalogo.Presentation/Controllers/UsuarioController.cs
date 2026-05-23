@@ -1,9 +1,11 @@
 ﻿using CatalogoApp.Application.Service;
 using CatalogoApp.Domain.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System.Buffers.Text;
-using System.Runtime.InteropServices;
-using System.Text.Unicode;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace CatalogoApp.Presentation.Controllers
 {
@@ -17,41 +19,66 @@ namespace CatalogoApp.Presentation.Controllers
             _service = service;
         }
 
+        // --- PANTALLA DE REGISTRO ---
         public IActionResult Registrar()
         {
             return View();
         }
-        // 2. Guardar el usuario (POST)
+
         [HttpPost]
         public IActionResult Registrar(User user)
         {
-            _service.IniciarSesion(user);
+            // Ahora sí usamos Agregar
+            _service.Agregar(user);
+
             // Tras registrarse, lo mandamos al catálogo
             return RedirectToAction("Index", "Catalogo");
         }
 
+
+        // --- PANTALLA DE INICIO DE SESIÓN ---
         public IActionResult IniciarSesion()
         {
             return View();
         }
 
-        // Formulario — POST
         [HttpPost]
-        public IActionResult IniciarSesion(string correo, string contrasena)
+        public async Task<IActionResult> IniciarSesion(string correo, string contrasena) // <-- Nota el async Task<>
         {
             var usuarios = _service.ObtenerTodos();
-
-            // Busca si existe alguien con ese correo y esa contraseña
             var usuarioValido = usuarios.FirstOrDefault(u => u.Correo == correo && u.Contrasena == contrasena);
 
             if (usuarioValido != null)
-                return RedirectToAction("Index", "Catalogo");
+            {
+                // 1. Creamos la información del gafete (Claims)
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, usuarioValido.Nombre),
+                    new Claim(ClaimTypes.Email, usuarioValido.Correo)
+                };
 
-            // Si no es válido, mostrar mensaje de error
+                // 2. Creamos la identidad y le ponemos el sello oficial
+                var identidad = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // 3. Le entregamos el gafete (Cookie) al navegador
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identidad));
+
+                return RedirectToAction("Index", "Catalogo");
+            }
+
             ModelState.AddModelError(string.Empty, "Correo o contraseña incorrectos");
             return View();
-
         }
 
+        // --- CERRAR SESIÓN ---
+        // Este es el método nuevo al que llamará tu botón del menú
+        public async Task<IActionResult> CerrarSesion()
+        {
+            // Le quitamos el gafete (borramos la cookie)
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Lo regresamos a la pantalla de inicio principal
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

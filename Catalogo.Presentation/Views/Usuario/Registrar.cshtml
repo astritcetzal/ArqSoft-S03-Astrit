@@ -1,8 +1,8 @@
 ﻿@model CatalogoApp.Domain.Models.User
 
 <div class="contenedos-formulario">
-    <h1>IniciarSesion</h1>
-    <form asp-action="Registrar" method="post" enctype="multipart/form-data">
+    <h1>Registrarse</h1>
+    <form asp-action="Registrar" method="post">
         <div class="grupo-input">
             <label>Nombre</label>
             <input asp-for="Nombre" />
@@ -16,10 +16,7 @@
             <input asp-for="Contrasena" type="password" />
         </div>
         <button type="submit" class="btn-guardar">Registrar</button>
-
     </form>
-
     <hr />
-    <a asp-action="Index" class="link-cancelar">&larr; Cancelar</a>
-
+    <a asp-controller="Catalogo" asp-action="Index" class="link-cancelar">&larr; Cancelar</a>
 </div>

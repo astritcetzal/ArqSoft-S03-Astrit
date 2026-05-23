@@ -1,12 +1,16 @@
 using CatalogoApp.Application.Service;
 using CatalogoApp.Domain.Interfaces;
 using CatalogoApp.Infrastructure.Repositories;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Agrega servicios MVC
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opciones =>
+    {
+        opciones.LoginPath = "/Usuario/IniciarSesion"; // Si alguien sin sesión intenta entrar a algo bloqueado, lo manda aquí
+    });
 // Ruta del archivo JSON
 var jsonPath = Path.Combine(builder.Environment.ContentRootPath, "data", "items.json");
 // Ruta del archivo JSON
@@ -32,6 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication(); // <-- ¡Esta es la que lee el gafete!
 app.UseAuthorization();
 
 app.MapControllerRoute(

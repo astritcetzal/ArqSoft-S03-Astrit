@@ -32,8 +32,8 @@ namespace CatalogoApp.Infrastructure.Repositories
             return JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
         }
 
-        // Inicia sesión y guarda la lista completa en el JSON
-        public void IniciarSesion(User user)
+        // Agrega un usuario y guarda la lista completa en el JSON
+        public void Agregar(User user)
         {
             var users = ObtenerTodos();
 

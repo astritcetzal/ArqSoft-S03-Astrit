@@ -26,7 +26,7 @@ namespace CatalogoApp.Application.Service
             return _repo.ObtenerPorId(id);
         }
 
-        public void IniciarSesion(User user)
+        public void Agregar(User user)
         {
             // Aquí podrías agregar validaciones de negocio
             // Por ejemplo: if (string.IsNullOrEmpty(user.Nombre)) throw...

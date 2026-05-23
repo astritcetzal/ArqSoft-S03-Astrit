@@ -9,6 +9,6 @@ namespace CatalogoApp.Domain.Interfaces
     {
         List<User> ObtenerTodos();
         User? ObtenerPorId(int id);
-        void IniciarSesion(User user);
+        void Agregar(User user);
     }
 }

@@ -3,7 +3,12 @@
     "Id": 1,
     "Nombre": "Edrik",
     "Correo": "edrik@example.com",
-    "Contraseña": holamundo123
-
+    "Contrasena": "abcrh"
+  },
+  {
+    "Id": 2,
+    "Nombre": "airan ",
+    "Correo": "astri@gmail.com",
+    "Contrasena": "abcde"
   }
 ]
