@@ -5,7 +5,7 @@ using System.Buffers.Text;
 using System.Runtime.InteropServices;
 using System.Text.Unicode;
 
-namespace Catalogo.Presentation.Controllers
+namespace CatalogoApp.Presentation.Controllers
 {
     public class CatalogoController : Controller
     {

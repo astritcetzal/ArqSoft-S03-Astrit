@@ -1,0 +1,25 @@
+﻿@model CatalogoApp.Domain.Models.User
+
+<div class="contenedos-formulario">
+    <h1>IniciarSesion</h1>
+    <form asp-action="Agregar" method="post" enctype="multipart/form-data">
+        <div class="grupo-input">
+            <label>Nombre</label>
+            <input asp-for="Nombre" />
+        </div>
+        <div class="grupo-input">
+            <label>Correo</label>
+            <input asp-for="Correo" />
+        </div>
+        <div class="grupo-input">
+            <label>Contraseña</label>
+            <input asp-for="Contrasena" type="password" />
+        </div>
+        <button type="submit" class="btn-guardar">Registrar</button>
+
+    </form>
+
+    <hr />
+    <a asp-action="Index" class="link-cancelar">&larr; Cancelar</a>
+
+</div>

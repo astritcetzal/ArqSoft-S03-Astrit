@@ -8,6 +8,10 @@ html {
     font-size: 18px;
   }
 }
+.log{
+    text-align:right;
+    position: relative;
+}
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--morado);
@@ -63,7 +67,7 @@ header {
 }
 
 .mi-menu-morado {
-    background-color: var(--morado-claro);
+    background: linear-gradient(135deg, #F3E5F5 0%, #ef9de4 45%, #9226bd 100%);
     box-shadow: 0 4px 15px var(--morado-oscuro) !important;
 }
 
@@ -75,6 +79,7 @@ header {
 .navbar-dark .nav-link:hover {
     color: var(--lila-pastel) !important;
 }
+
 
 .btn-agregar-album {
     background-color: var(--lila-pastel);
@@ -98,6 +103,7 @@ header {
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(106,27,154,0.3);
 }
+
 
 .grupo-input {
     margin-bottom: 20px;

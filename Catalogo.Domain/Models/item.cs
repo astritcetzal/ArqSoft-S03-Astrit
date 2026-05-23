@@ -7,7 +7,7 @@ namespace CatalogoApp.Domain.Models
     public class Item
     {
         public int Id { get; set; }
-        public string Titulo { get; set; }
+        public string Titulo { get; set; } = string.Empty;
         public string tiposLanzamiento { get; set; }
         public int Ano { get; set; }
         public int numeroCanciones { get; set; }
