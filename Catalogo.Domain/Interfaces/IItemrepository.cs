@@ -11,5 +11,7 @@ namespace CatalogoApp.Domain.Interfaces
         Item? ObtenerPorId(int id);
         void Agregar(Item item);
         void Eliminar(int id);
+
+        //controller llama repositorIo y est eultimo json 
     }
 }

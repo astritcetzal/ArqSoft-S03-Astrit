@@ -39,7 +39,7 @@ namespace CatalogoApp.Presentation.Controllers
             var item = _service.ObtenerPorId(id);
             var resenas = _reviewService.ObtenerPorAlbum(id);
 
-            // Lógica de promedio:
+            // Lógica de promedio:ViewBag.
             double promedio = resenas.Any() ? resenas.Average(r => r.Calificacion) : 0;
 
             ViewBag.Reseñas = resenas;
